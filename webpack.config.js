@@ -40,12 +40,15 @@ module.exports = {
       }),
         new htmlWebpackPlugin({
             template : path.join(__dirname, 'template/account.html'),
+            // chunks : [''] 이런식으로 하면 entry를 이 html에 삽입하질 않는다.
             chunks : ['account'],
             inject : true,
             title : 'account template',
             filename : path.join(__dirname,'dist/html/account/account.html')
         }),
         // __dirname 은 현재 작업중인 path 를 return 해줌
-        new cleanWebpackPlugin(path.join(__dirname,'dist'))
+        new cleanWebpackPlugin(path.join(__dirname,'dist')),
+        // 아래와 같이 한번 더 선언하여 2중으로 clean이 가능
+        // new cleanWebpackPlugin(path.join(__dirname,'{{some}}'))
     ]
 }
